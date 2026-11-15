@@ -1,6 +1,27 @@
 # transactions = []
 transactions = [{'date': '12-11-2026', 'ket': 'Gaji', 'amount': 35000, 'type': 'pemasukan'}, {'date': '13-11-2026', 'ket': 'Makan siang', 'amount': 55000, 'type': 'pemasukan'}]
 
+def hitungSaldo (list):
+    balance = 0
+    for idx, ts in enumerate(list, start=1) :
+        print(f"{idx}. {ts["date"]} | {ts["ket"]} | {ts["amount"]} ({ts["type"]})")
+        
+        if ts["type"] == "pemasukan" :
+            balance = balance + ts["amount"]
+        elif ts["type"] == "pengeluaran" :
+            balance = balance - ts["amount"]
+    return balance
+
+def tampilkanTransaksi(list):
+    if len(list) == 0:
+        print("Belum ada Data transaksi")
+    else :
+        print("[Daftar Transaksi]")
+        print("-------------------------------------------")  
+        total = hitungSaldo(transactions)
+        print("-------------------------------------------")  
+        print(f"Total Saldo saat ini: {total} \n")
+
 
 while True:
     print("=== MENU UTAMA ===")
@@ -14,11 +35,12 @@ while True:
         print("\n---> Anda memilih menu Tambah\n")
 
         print("[Input Transaksi Baru]\n")
+        
         newTransaction = {}
-
         print("Jenis transaksi: ")
         print("1. Pemasukkan")
         print("2. Pengeluaran")
+        
         typeSelection = input("Pilih jenis transaksi (1/2): ")
         if typeSelection == "1":
             print("Jenis: pemasukan")
@@ -36,20 +58,7 @@ while True:
 
     elif menuSelection == "2":
         print("\n---> Anda memilih menu Lihat\n")
-        print("[Daftar Transaksi]\n")
-        print("-------------------------------------------")
-    
-        balance = 0
-        for idx, ts in enumerate(transactions, start=1) :
-            print(f"{idx}. {ts["date"]} | {ts["ket"]} | {ts["amount"]} ({ts["type"]})")
-            if ts["type"] == "pemasukan" :
-                balance = balance + ts["amount"]
-            elif ts["type"] == "pengeluaran" :
-                balance = balance - ts["amount"]
-    
-        
-        print("-------------------------------------------")
-        print(f"Total Saldo saat ini: {balance} \n")
+        tampilkanTransaksi(transactions)
 
     elif menuSelection == "3":
         print("\nProgram Selesai\n")
