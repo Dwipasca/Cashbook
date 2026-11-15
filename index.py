@@ -1,5 +1,7 @@
-print("Masukkan nama anda")
-name = input('---> ').capitalize()
-greeting = "\nHello "+ name + "! Good afternoon."
+nominal = input("Masukkan nominal : ")
+nominal = int(nominal)
 
-print(greeting)
+if nominal > 0 :
+    print("Status: pemasukkan")
+else : 
+    print("Status: pengeluaran")
