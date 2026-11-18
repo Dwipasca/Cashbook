@@ -1,5 +1,7 @@
-# transactions = []
-transactions = [{'date': '12-11-2026', 'ket': 'Gaji', 'amount': 35000, 'type': 'pemasukan'}, {'date': '13-11-2026', 'ket': 'Makan siang', 'amount': 55000, 'type': 'pemasukan'}]
+import csv
+
+name_file = "dummy.csv"
+
 
 def hitungSaldo (list):
     balance = 0
@@ -12,15 +14,16 @@ def hitungSaldo (list):
             balance = balance - ts["amount"]
     return balance
 
-def tampilkanTransaksi(list):
-    if len(list) == 0:
-        print("Belum ada Data transaksi")
-    else :
-        print("[Daftar Transaksi]")
-        print("-------------------------------------------")  
-        total = hitungSaldo(transactions)
-        print("-------------------------------------------")  
-        print(f"Total Saldo saat ini: {total} \n")
+def tampilkanTransaksi():
+    print("[Daftar Transaksi]")
+    print("-------------------------------------------")  
+    
+    with open(name_file, mode="r", encoding="utf-8") as file :
+        read_csv = csv.DictReader(file)
+        
+        for baris in read_csv :
+            print(f"{baris["tanggal"]:<10} | {baris["keterangan"]:<20} | {baris["jumlah"]:<10} | {baris["jenis"]}")
+    print("-------------------------------------------")  
 
 
 while True:
@@ -58,7 +61,7 @@ while True:
 
     elif menuSelection == "2":
         print("\n---> Anda memilih menu Lihat\n")
-        tampilkanTransaksi(transactions)
+        tampilkanTransaksi()
 
     elif menuSelection == "3":
         print("\nProgram Selesai\n")
